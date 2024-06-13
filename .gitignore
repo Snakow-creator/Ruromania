@@ -1,0 +1,70 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+
+# Logs
+*.log
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# Environment / secrets
+.env
+.env.*
+*.secret
+secrets.json
+config.ini
+
+# Byte-compiled / test coverage
+.coverage
+.tox/
+.cache/
+.pytest_cache/
+
+# Telegram API / common project files
+session.session
+*.session*
+__telethon__.session
+*.db
+*.sqlite
+*.log
+
+# Jupyter notebooks (optional)
+.ipynb_checkpoints/
+
+# mypy / pyright
+.mypy_cache/
+.pyright/
+
+# Output
+output/
+results/
+
+# black and flake8
+pre-commit
+setup.cfg
+
+# sql
+users.sqlite3
+
+# secret config
