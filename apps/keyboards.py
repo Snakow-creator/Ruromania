@@ -23,6 +23,11 @@ main_games = ReplyKeyboardMarkup(
     input_field_placeholder="Выберите игру ниже:",
 )
 
+# клавиатура подписки на канал
+sub_channel = InlineKeyboardMarkup(
+					inline_keyboard=[[InlineKeyboardButton(
+					text="Подписаться на канал", url="https://t.me/obotov")]]
+)
 
 # Кнопки под сообщением, пополнение баланса
 def keyboard_money():
@@ -214,3 +219,4 @@ slot_button = InlineKeyboardMarkup(
         ]
     ]
 )
+

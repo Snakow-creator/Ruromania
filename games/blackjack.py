@@ -66,8 +66,6 @@ async def random_blackjack(callback: types.CallbackQuery):
     count_bot = 0
     deck = [6, 7, 8, 9, 10, 2, 3, 4, 11] * 4
     random.shuffle(deck)
-    time.sleep(0.8)
-    await callback.message.answer("Успешно.")
     while True:
         if count < 11:
             current = deck.pop()
@@ -115,25 +113,25 @@ async def user(callback: types.CallbackQuery, count: int):
         )
 
 
-async def bot_bj(callback: types.CallbackQuery, count_bot: int):
+async def bot_bj(callback: types.CallbackQuery, count_bot: int, stand_repeat = False):
     global user_count, data_count
     user_count = data_count.get(callback.from_user.id, 0)
     if user_count == 21:
         await callback.message.answer("Blackjack! Ты выйграл.")
         await win_bj(callback)
-    elif count_bot == 21:
-        await callback.message.answer("Ты проиграли, бот выйграл Blackjack😓.")
+    elif user_count > 21:
+        await callback.message.answer("Проигрыш, ты набрал больше 21 очка😓.")
         await loss_bj(callback)
+    elif count_bot == 21:
+        await callback.message.answer("Ты проиграл, бот выйграл Blackjack😓.")
+        await loss_bj(callback)
+        return
     elif count_bot >= 21:
         await callback.message.answer("Победа, бот набрал больше 21 очка.")
         await win_bj(callback)
-    elif count_bot > user_count:
-        await callback.message.answer("Проигрыш, бот набрал больше очков😓.")
-        await loss_bj(callback)
-    elif count_bot == user_count:
-        await callback.message.answer(
-            "Ничья, ты набрал одинаковое количество очков🙌🏻."
-        )
+        return
+    if stand_repeat: # if bot_bj was called from stand
+        await stand(callback)
     else:
         await callback.message.answer(
             f"У тебя {user_count} очков."
@@ -184,11 +182,11 @@ async def stand(callback: types.CallbackQuery):
     user_count_bot = data_count_bot.get(callback.from_user.id, 0)
     current = data_deck.pop()
     time.sleep(0.3)
-    await callback.message.edit_text(
+    await callback.message.answer(
         f"Дилеру выпала карта достоинством: {current} очков"
     )
     data_count_bot[callback.from_user.id] = user_count_bot + current
-    await bot_bj(callback, user_count_bot + current)
+    await bot_bj(callback, user_count_bot + current, stand_repeat=True)
 
 
 # Кнопки ставок

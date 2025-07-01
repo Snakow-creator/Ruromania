@@ -7,12 +7,10 @@ async def top_balance(message: Message):
    dict_balance = {}
    list_users = await top_users()
    for users in list_users:
-      dict_users[users.tg_id] = users.fullname
+      dict_users[users.tg_id] = users.name
       dict_balance[users.tg_id] = users.money_value
-   print(dict_users)
-   print(dict_balance)
    await text_top(message=message, dict_users=dict_users, dict_balance=dict_balance)
-   
+
 #Пишем текст:
 async def text_top(message: Message, dict_users: dict, dict_balance=dict):
    text = "Топ пользователей по балансу:"
@@ -21,10 +19,6 @@ async def text_top(message: Message, dict_users: dict, dict_balance=dict):
    user_money = sorted(dict_balance.values(), reverse=True)
    dict_id = dict(sort)
    user_id = list(dict_id.keys())
-   print(f"\n\n\n{user_id}")
-   print(dict_id)
-   print(user_money)
-   print(dict_users)
    while True:
       timer += 1
       if timer >= 11:
@@ -36,4 +30,3 @@ async def text_top(message: Message, dict_users: dict, dict_balance=dict):
          text_user = f"{username}: {user_money.pop(0)}"
          text += f"\n{timer}. {text_user}"
    await message.answer(text)
-   
