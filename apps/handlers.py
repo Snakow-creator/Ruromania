@@ -41,7 +41,7 @@ async def start(message: Message):
         fullname=message.from_user.username,
     )
     await message.answer(
-        f"Хей {message.from_user.first_name}, добро пожаловать в казино Руромания!"
+        f"Хей <b>{message.from_user.first_name}</b>, добро пожаловать в казино Руромания!"
         f"\nДля начала ознакомься с кнопками ниже⬇️",
         reply_markup=kb.main,
     )
@@ -154,8 +154,8 @@ async def scam(message: Message, state: FSMContext):
 @router.message(F.text == "Информация♟")
 async def dep_money(message: Message):
     await message.answer(
-        "Версия бота -- 1.0.0 release."
-        '\n\n"Можно долго ждать обновлений, а можно играть в казино руромания."'
+        "Версия бота -- 1.1.0"
+        '\nПодпишись на канал, чтобы быть в курсе о новых обновлениях. \nhttps://t.me/obotov'
     )
 
 

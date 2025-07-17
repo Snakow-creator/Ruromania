@@ -23,7 +23,6 @@ async def main():
     await start_logging()
 
     dp.message.middleware(AntiFloodMiddleware())
-    dp.message.middleware(CheckSubscribtion())
     dp.include_routers(handlers.router, callbacks.router)
 
     await dp.start_polling(bot)

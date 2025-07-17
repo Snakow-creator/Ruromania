@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, BigInteger, String
 from sqlalchemy.orm import mapped_column, Mapped, DeclarativeBase, sessionmaker
 from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine
 
-async_engine = create_async_engine(url="sqlite+aiosqlite:///users.sqlite3", echo=True)
+async_engine = create_async_engine(url="sqlite+aiosqlite:///users.sqlite3")
 async_session = async_sessionmaker(async_engine)
 
 
